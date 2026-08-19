@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#fafaf8">
+<title>Projects & CTFs — Blessing Ndoro</title>
+<meta name="description" content="Featured projects and CTF competitions by Blessing Ndoro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-glyph">&gt;_</span>
+      <span class="nav-brand-text">blessing<span class="accent">.</span>ndoro</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="my-story.html">My Story</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="skills.html">Skills</a>
+      <a href="articles.html">Articles</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="breadcrumb"><a href="index.html">Home</a> / Projects</p>
+    <p class="section-eyebrow" style="margin-top:14px;">Projects</p>
+    <h1 class="page-hero-title">Projects worth opening.</h1>
+    <p class="page-hero-sub">Full-stack builds where I've applied security and engineering thinking together — plus the competitions that put it to the test.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="section-inner">
+    <div class="project-block reveal">
+      <div class="project-copy">
+        <span class="pill pill-live">Full-stack build</span>
+        <h3>ALA — Autonomous Life Assistant</h3>
+        <p>An AI-powered care platform built to help elderly users live independently. It watches for falls in real time, routes context to an AI layer for triage, and escalates to caregivers automatically when something looks wrong — no one has to notice in time to act.</p>
+        <p class="project-role">I built the majority of this full-stack: the Express API, the Firebase real-time data layer, the pluggable AI adapter routing (OpenAI / Gemini / Claude), and the Twilio-based emergency escalation pipeline.</p>
+        <div class="tag-row">
+          <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Firebase</span><span class="tag">Twilio</span><span class="tag">AI Adapters</span>
+        </div>
+        <a href="https://github.com/bndoro/AI-Care-Assistant" target="_blank" class="btn btn-ghost btn-small">View on GitHub →</a>
+      </div>
+      <div class="editor">
+        <div class="editor-bar">
+          <div class="terminal-dots"><span></span><span></span><span></span></div>
+          <span class="editor-tab">alerts.escalate.ts</span>
+        </div>
+        <pre class="editor-body"><code><span class="c-com">// POST /api/alerts/escalate</span>
+<span class="c-com">// Triggered when the vision model flags a fall event</span>
+<span class="c-kw">export async function</span> <span class="c-fn">escalateFallAlert</span>(event: FallEvent) {
+  <span class="c-kw">const</span> patient = <span class="c-kw">await</span> db
+    .collection(<span class="c-str">"patients"</span>)
+    .doc(event.patientId)
+    .get();
+
+  <span class="c-kw">const</span> severity = classifySeverity(event.confidence);
+
+  <span class="c-kw">await</span> db.collection(<span class="c-str">"alerts"</span>).add({
+    patientId: event.patientId,
+    severity,
+    detectedAt: event.timestamp,
+    status: <span class="c-str">"pending_ack"</span>,
+  });
+
+  <span class="c-kw">if</span> (severity === <span class="c-str">"high"</span>) {
+    <span class="c-kw">await</span> notifyCaregiver({
+      to: patient.data().caregiverPhone,
+      channel: <span class="c-str">"sms"</span>,
+      body: <span class="c-str">`⚠ Fall detected — ${patient.data().name}. </span>
+<span class="c-str">Confidence ${event.confidence}%. Responding...`</span>,
+    });
+  }
+
+  <span class="c-kw">return</span> { escalated: <span class="c-kw">true</span>, severity };
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="project-more reveal">
+      <div class="project-more-inner">
+        <span class="pill pill-progress">In progress</span>
+        <p>More projects are on the way. Check back soon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Exhibits</p>
+    <h2 class="section-title reveal">CTFs &amp; challenges.</h2>
+
+    <div class="exhibit-grid reveal">
+      <div class="exhibit-card exhibit-featured">
+        <div class="exhibit-tag">EXHIBIT A — 1ST PLACE</div>
+        <h3>Cyber Pro AI — Solo CTF</h3>
+        <p>Took first place solo in a competition centered on reverse engineering. One challenge required scripting a way to manipulate memory to trick an application into granting privilege escalation it shouldn't have allowed — alongside a full slate of additional challenges.</p>
+        <div class="tag-row">
+          <span class="tag">Reverse Engineering</span><span class="tag">Privilege Escalation</span><span class="tag">Scripting</span>
+        </div>
+      </div>
+      <div class="exhibit-card">
+        <div class="exhibit-tag">EXHIBIT B — BETA TESTER</div>
+        <h3>World Wide Technology</h3>
+        <p>Selected as a BETA tester for CTF challenges developed by WWT, stress-testing new challenge design ahead of public release. Full write-up coming soon.</p>
+        <div class="tag-row"><span class="tag">Challenge Testing</span><span class="tag">More soon</span></div>
+      </div>
+      <div class="exhibit-card exhibit-htb">
+        <div class="exhibit-tag">EXHIBIT C — LIVE PROFILE</div>
+        <h3>Hack The Box</h3>
+        <p class="htb-handle">@blessingn</p>
+        <div class="htb-badges">
+          <span class="badge">🎓 Academician</span>
+          <span class="badge">🛡 Unwavering User</span>
+          <span class="badge">🌀 Cyber Rookie 365</span>
+        </div>
+        <a href="https://profile.hackthebox.com/profile/01a01ab1-17c6-7104-8852-05320f98133a" target="_blank" class="btn btn-ghost btn-small">View HTB Profile →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2026 Blessing Ndoro. Built from scratch, logged and timestamped.</p>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
