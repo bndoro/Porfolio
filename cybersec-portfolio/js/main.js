@@ -98,9 +98,9 @@ runSequence();
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 20) {
-    nav.style.background = 'rgba(10,10,12,0.92)';
+    nav.style.background = 'rgba(250,250,248,0.95)';
   } else {
-    nav.style.background = 'rgba(10,10,12,0.75)';
+    nav.style.background = 'rgba(250,250,248,0.85)';
   }
 });
 
