@@ -47,54 +47,51 @@
   <div class="section-inner">
     <div class="project-block reveal">
       <div class="project-copy">
-        <span class="pill pill-live">Full-stack build</span>
-        <h3>ALA — Autonomous Life Assistant</h3>
-        <p>An AI-powered care platform built to help elderly users live independently. It watches for falls in real time, routes context to an AI layer for triage, and escalates to caregivers automatically when something looks wrong — no one has to notice in time to act.</p>
-        <p class="project-role">I built the majority of this full-stack: the Express API, the Firebase real-time data layer, the pluggable AI adapter routing (OpenAI / Gemini / Claude), and the Twilio-based emergency escalation pipeline.</p>
+        <h3>Life Care AI Assistant</h3>
+        <p>An AI-powered care platform built to address medication non-adherence among isolated elderly patients — combining a medication reminder system, real-time fall detection, and automatic caregiver escalation into one unified platform.</p>
+        <p class="project-role">I led systems integration across our 4-person team, making sure the medication reminder, patient/caregiver dashboards, computer-vision-based fall detection, and autonomous caregiver-alert modules worked together as one platform. I also built ARIA, an AI voice assistant that automates tasks for the platform's elderly users.</p>
         <div class="tag-row">
-          <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Firebase</span><span class="tag">Twilio</span><span class="tag">AI Adapters</span>
+          <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Firebase</span><span class="tag">Twilio</span><span class="tag">Voice AI</span>
         </div>
         <a href="https://github.com/bndoro/AI-Care-Assistant" target="_blank" class="btn btn-ghost btn-small">View on GitHub →</a>
       </div>
-      <div class="editor">
-        <div class="editor-bar">
+      <div class="slide-shot">
+        <div class="slide-shot-bar">
           <div class="terminal-dots"><span></span><span></span><span></span></div>
-          <span class="editor-tab">alerts.escalate.ts</span>
+          <span class="slide-shot-label">Life Care AI Assistant — John's Dashboard</span>
         </div>
-        <pre class="editor-body"><code><span class="c-com">// POST /api/alerts/escalate</span>
-<span class="c-com">// Triggered when the vision model flags a fall event</span>
-<span class="c-kw">export async function</span> <span class="c-fn">escalateFallAlert</span>(event: FallEvent) {
-  <span class="c-kw">const</span> patient = <span class="c-kw">await</span> db
-    .collection(<span class="c-str">"patients"</span>)
-    .doc(event.patientId)
-    .get();
+        <img src="/assets/aria-dashboard.png" alt="Screenshot of the Life Care AI Assistant dashboard, showing vitals, medications, the ARIA voice assistant, live fall detection monitoring, and an emergency call-for-help button">
+      </div>
+    </div>
 
-  <span class="c-kw">const</span> severity = classifySeverity(event.confidence);
+    <div class="project-block reveal">
+      <div class="project-copy">
+        <h3>NetForensics — PCAP Forensic Analysis Platform</h3>
+        <p style="color:var(--text-dim); font-size:13.5px; margin-top:0; margin-bottom:14px;">Southeast Missouri State University · Spring 2026</p>
+        <p>A full-stack forensic analysis tool that parses packet captures and surfaces traffic patterns, malware indicators, exfiltration attempts, credentials, port scans, and a full investigation timeline — built as our senior capstone project.</p>
+        <p class="project-role">I owned the backend: all 7 Flask REST API endpoints, a PyShark PCAP parser, magic-byte server-side file validation, Flask-Login session management with Bcrypt password hashing, and fpdf2-based PDF/CSV report generation. I also designed all four UML models (Use Case, Class, Sequence, Activity), validated every endpoint against the React frontend, and wrote subprocess-level tests confirming our TShark integration matched Wireshark's ground truth on both Windows and Linux.</p>
+        <p class="project-role" style="margin-top:12px; border-left-color:rgba(180,83,9,0.4);">💡 <strong>Lesson learned:</strong> PyShark's eager-load mode blew past our 5-minute performance requirement on 1&nbsp;GB files (7+ minutes). Switching to lazy iteration cut load time to 3m 42s — catch performance-sensitive architecture decisions during design, not during Week 4 testing.</p>
+        <div class="tag-row">
+          <span class="tag">React 18</span>
+          <span class="tag">Flask REST API</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">PyShark</span>
+          <span class="tag">Wireshark / TShark</span>
+        </div>
+        <a href="https://github.com/NickH0dges/NetForensics" target="_blank" class="btn btn-ghost btn-small">View on GitHub →</a>
+      </div>
 
-  <span class="c-kw">await</span> db.collection(<span class="c-str">"alerts"</span>).add({
-    patientId: event.patientId,
-    severity,
-    detectedAt: event.timestamp,
-    status: <span class="c-str">"pending_ack"</span>,
-  });
-
-  <span class="c-kw">if</span> (severity === <span class="c-str">"high"</span>) {
-    <span class="c-kw">await</span> notifyCaregiver({
-      to: patient.data().caregiverPhone,
-      channel: <span class="c-str">"sms"</span>,
-      body: <span class="c-str">`⚠ Fall detected — ${patient.data().name}. </span>
-<span class="c-str">Confidence ${event.confidence}%. Responding...`</span>,
-    });
-  }
-
-  <span class="c-kw">return</span> { escalated: <span class="c-kw">true</span>, severity };
-}</code></pre>
+      <div class="slide-shot">
+        <div class="slide-shot-bar">
+          <div class="terminal-dots"><span></span><span></span><span></span></div>
+          <span class="slide-shot-label">NetForensics — Evidence Repository</span>
+        </div>
+        <img src="/assets/netforensics-app.png" alt="Screenshot of the NetForensics Evidence Repository dashboard, showing evidence items with chain-of-custody tracking, case IDs, and status badges">
       </div>
     </div>
 
     <div class="project-more reveal">
       <div class="project-more-inner">
-        <span class="pill pill-progress">In progress</span>
         <p>More projects are on the way. Check back soon.</p>
       </div>
     </div>
@@ -103,26 +100,52 @@
 
 <section class="section section-alt">
   <div class="section-inner">
-    <p class="section-eyebrow reveal">Exhibits</p>
+    <p class="section-eyebrow reveal">CTFs</p>
     <h2 class="section-title reveal">CTFs &amp; challenges.</h2>
 
     <div class="exhibit-grid reveal">
-      <div class="exhibit-card exhibit-featured">
-        <div class="exhibit-tag">EXHIBIT A — 1ST PLACE</div>
+
+      <div class="exhibit-card">
         <h3>Cyber Pro AI — Solo CTF</h3>
-        <p>Took first place solo in a competition centered on reverse engineering. One challenge required scripting a way to manipulate memory to trick an application into granting privilege escalation it shouldn't have allowed — alongside a full slate of additional challenges.</p>
+        <p style="margin-top:10px;">Took first place solo in a competition centered on reverse engineering. One challenge required scripting a way to manipulate memory to trick an application into granting privilege escalation it shouldn't have allowed — alongside a full slate of additional challenges.</p>
         <div class="tag-row">
           <span class="tag">Reverse Engineering</span><span class="tag">Privilege Escalation</span><span class="tag">Scripting</span>
         </div>
       </div>
+
       <div class="exhibit-card">
-        <div class="exhibit-tag">EXHIBIT B — BETA TESTER</div>
-        <h3>World Wide Technology</h3>
-        <p>Selected as a BETA tester for CTF challenges developed by WWT, stress-testing new challenge design ahead of public release. Full write-up coming soon.</p>
-        <div class="tag-row"><span class="tag">Challenge Testing</span><span class="tag">More soon</span></div>
+        <h3>Collaborative Cyber Defense CTF</h3>
+        <p style="margin-top:10px;">Detected and responded to simulated live cyber threats on Cympire's AI-driven cyber range. Escalated privileges on a Windows target by exploiting a misconfigured service, and used a path traversal vulnerability with Python scripting to solve challenges. Placed 1st overall.</p>
+        <div class="tag-row">
+          <span class="tag">Privilege Escalation</span><span class="tag">Path Traversal</span><span class="tag">Python</span>
+        </div>
       </div>
+
+      <div class="exhibit-card">
+        <h3>Welcome to the League CTF</h3>
+        <p style="margin-top:10px;">Competed solo in an 8-hour Active Directory red-team CTF, finishing 4th out of all participants (19 correct submissions) — trailing only an experienced WWT employee and two frequent competitors. Rated "Very Effective" in Initial Access and Lateral Movement.</p>
+        <div class="tag-row">
+          <span class="tag">Metasploit</span><span class="tag">Bloodhound</span><span class="tag">Mimikatz</span><span class="tag">Hashcat</span><span class="tag">Impacket</span>
+        </div>
+      </div>
+
+      <div class="exhibit-card">
+        <h3>The Infection Core CTF</h3>
+        <p style="margin-top:10px;">Investigated a narrative-driven malware incident, tracking and working to neutralize a simulated autonomous cyber-weapon under live-incident pressure. Practiced reverse engineering with IDA/Ghidra, memory forensics, network traffic analysis with Wireshark, password cracking, and cryptanalysis.</p>
+        <div class="tag-row">
+          <span class="tag">IDA / Ghidra</span><span class="tag">Memory Forensics</span><span class="tag">John the Ripper</span>
+        </div>
+      </div>
+
+      <div class="exhibit-card">
+        <h3>Cisco AI Defense CTF</h3>
+        <p style="margin-top:10px;">A single-player, 72-hour CTF attempting to bypass generative AI guardrails, built on Cisco AI Defense. Explored real-world GenAI attack techniques — prompt injection, jailbreaking, model misuse — and observed how Cisco's AI Defense detects and mitigates them in real time.</p>
+        <div class="tag-row">
+          <span class="tag">Prompt Injection</span><span class="tag">Jailbreaking</span><span class="tag">Cisco AI Defense</span>
+        </div>
+      </div>
+
       <div class="exhibit-card exhibit-htb">
-        <div class="exhibit-tag">EXHIBIT C — LIVE PROFILE</div>
         <h3>Hack The Box</h3>
         <p class="htb-handle">@blessingn</p>
         <div class="htb-badges">
@@ -132,6 +155,7 @@
         </div>
         <a href="https://profile.hackthebox.com/profile/01a01ab1-17c6-7104-8852-05320f98133a" target="_blank" class="btn btn-ghost btn-small">View HTB Profile →</a>
       </div>
+
     </div>
   </div>
 </section>
