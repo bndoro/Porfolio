@@ -97,11 +97,7 @@ runSequence();
 // ============ NAV BACKGROUND ON SCROLL ============
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) {
-    nav.style.background = 'rgba(250,250,248,0.95)';
-  } else {
-    nav.style.background = 'rgba(250,250,248,0.85)';
-  }
+  nav.classList.toggle('scrolled', window.scrollY > 20);
 });
 
 // ============ COPY BIO ============
