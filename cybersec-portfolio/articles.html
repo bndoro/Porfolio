@@ -6,11 +6,31 @@
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#fafaf8">
 <title>Articles — Blessing Ndoro</title>
-<meta name="description" content="Career updates and news from Blessing Ndoro. Coming soon.">
+<meta name="description" content="Career updates and news from Blessing Ndoro, collected from LinkedIn.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
+<style>
+  /* LinkedIn post embeds */
+  .post-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 504px));
+    gap:32px;
+    justify-content:start;
+    align-items:start;
+  }
+  .post-embed{width:100%; max-width:504px;}
+  .post-embed iframe{
+    display:block;
+    width:100%;
+    max-width:504px;
+    border:0;
+    border-radius:10px;
+    background:#fff;
+  }
+  .post-link{display:inline-block; margin-top:12px;}
+</style>
 </head>
 <body>
 
@@ -39,15 +59,32 @@
   <div class="page-hero-inner">
     <p class="breadcrumb"><a href="/">Home</a> / Articles</p>
     <p class="section-eyebrow" style="margin-top:14px;">Articles</p>
-    <h1 class="page-hero-title">Under construction.</h1>
-    <p class="page-hero-sub">Career updates and news, coming soon.</p>
+    <h1 class="page-hero-title">Career updates &amp; news.</h1>
+    <p class="page-hero-sub">Posts from my LinkedIn, collected in one place.</p>
   </div>
 </section>
 <section class="section">
   <div class="section-inner">
-    <div class="construction-box reveal">
-      <div class="blog-empty-glyph">&gt;_</div>
-      <p>This page is under construction. News and career updates coming soon.</p>
+    <div class="post-grid">
+
+      <!-- POST 1 -->
+      <div class="post-embed reveal">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7468177740685492224" height="1068" width="504" frameborder="0" allowfullscreen loading="lazy" title="Embedded LinkedIn post"></iframe>
+        <a class="link-arrow post-link" href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7468177740685492224/" target="_blank" rel="noopener">View on LinkedIn →</a>
+      </div>
+
+      <!-- POST 2 -->
+      <div class="post-embed reveal">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7450904245521788928?collapsed=1" height="1049" width="504" frameborder="0" allowfullscreen loading="lazy" title="Embedded LinkedIn post"></iframe>
+        <a class="link-arrow post-link" href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7450904245521788928/" target="_blank" rel="noopener">View on LinkedIn →</a>
+      </div>
+
+      <!-- POST 3 -->
+      <div class="post-embed reveal">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7442020856341606400?collapsed=1" height="627" width="504" frameborder="0" allowfullscreen loading="lazy" title="Embedded LinkedIn post"></iframe>
+        <a class="link-arrow post-link" href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7442020856341606400/" target="_blank" rel="noopener">View on LinkedIn →</a>
+      </div>
+
     </div>
   </div>
 </section>
